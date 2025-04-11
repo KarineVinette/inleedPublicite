@@ -22,8 +22,9 @@
 
   <h1>Bienvenue sur mon site</h1>
   <p>Voici une page d'exemple avec un système de consentement aux cookies.</p>
-<!-- Exemple de vidéo YouTube -->
-<div class="video-container">
+  
+  <!-- Exemple de vidéo YouTube -->
+  <div class="video-container">
     <div class="tarteaucitron-service" data-name="youtube" data-src="https://youtu.be/nKDqcPWdrW4?si=z54UI8BdIC_lpnke" data-lang="fr">
       Cliquez pour accepter les cookies YouTube et afficher la vidéo.
     </div>
@@ -38,12 +39,11 @@
   <!-- Script Tarteaucitron.js (gratuite, auto-hébergée ou depuis CDN officiel) -->
   <script src="https://tarteaucitron.io/load.js?domain=karinevinette.github.io%2FinleedPublicite&uuid=47c6586877816b23e86f7628832d2d7545fb09e8"></script>
   <script>
+    // Initialisation de Tarteaucitron
     tarteaucitron.init({
-        
       privacyUrl: "/politique-confidentialite.html",
       orientation: "bottom", // bandeau en bas
       showAlertSmall: false,
-    orientation: 'bottom',
       cookieslist: true,
       AcceptAllCta: true,
       highPrivacy: true,
@@ -51,19 +51,28 @@
       removeCredit: false,
       moreInfoLink: true,
       useExternalCss: false,
-      
     });
+
+    // Initialisation des services (YouTube)
     tarteaucitron.user.youtube = {
-  "lang": "fr"
-};
-tarteaucitron.job.push('youtube');
+      "lang": "fr"
+    };
+
+    // Vérification et ajout du job YouTube
+    if (tarteaucitron.job && Array.isArray(tarteaucitron.job)) {
+      tarteaucitron.job.push('youtube');
+    }
 
     // Google Analytics (Universal Analytics ou GA4)
-    tarteaucitron.user.gtagUa = 'G-XXXXXXXXXX'; // ← remplace par ton ID GA4 (ex: G-ABCD1234)
+    tarteaucitron.user.gtagUa = 'G-XXXXXXXXXX'; // Remplace par ton ID GA4
     tarteaucitron.user.gtagMore = function () {
       // Code additionnel si besoin
     };
-    tarteaucitron.job.push('gtag');
+
+    // Vérification et ajout du job Google Analytics
+    if (tarteaucitron.job && Array.isArray(tarteaucitron.job)) {
+      tarteaucitron.job.push('gtag');
+    }
   </script>
 
 </body>
