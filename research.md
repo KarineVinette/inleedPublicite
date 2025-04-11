@@ -424,3 +424,71 @@ Souhaites-tu aussi :
 - Masquer les cookies tiers YouTube même après consentement (pour un niveau ++ de confidentialité) ?
 
 Je peux t’aider à aller plus loin aussi si besoin !
+
+C’est possible oui 😄 Voyons ça ensemble ! Voici une petite checklist pour que **Tarteaucitron.js fonctionne bien en local** :
+
+---
+
+### ✅ 1. Tu utilises bien le bon script ?
+
+Voici le **script standard pour la version gratuite** :
+
+```html
+<script type="text/javascript" src="https://tarteaucitron.io/load.js?domain=localhost" async></script>
+```
+
+🔁 **À adapter** selon ton domaine :
+- Si tu testes en local → mets `localhost` (ou `127.0.0.1`)
+- Si ton site est en ligne → mets `monsite.com` ou ton vrai domaine
+
+---
+
+### ✅ 2. Tu as bien un `tarteaucitron.init(...)` dans ton JS ?
+
+Juste après le script :
+
+```html
+<script>
+  tarteaucitron.init({
+    privacyUrl: "/politique-confidentialite.html",
+    orientation: "bottom",
+    showAlertSmall: true,
+    cookieslist: true,
+    AcceptAllCta: true,
+    highPrivacy: true,
+    handleBrowserDNTRequest: false,
+    removeCredit: false,
+    moreInfoLink: true,
+    useExternalCss: false
+  });
+
+  // Exemple de service : Google Analytics
+  tarteaucitron.user.gtagUa = "G-XXXXXXXXXX";
+  tarteaucitron.job.push("gtag");
+</script>
+```
+
+---
+
+### ✅ 3. Tu ouvres bien le fichier dans un **serveur local** et pas juste en double-cliquant dessus ?
+
+> ❌ `file:///Users/.../index.html` → ça ne marchera pas bien
+
+✅ Utilise un serveur local comme :
+- `npx serve` (node.js)
+- `python -m http.server`
+- Ou Visual Studio Code + extension Live Server
+
+💡 Si tu veux, je peux te montrer comment lancer un petit serveur local rapide selon ton outil préféré.
+
+---
+
+### ✅ 4. Console du navigateur
+
+- Tu as des erreurs dans la **console développeur** (F12 > Console) ?
+- Des messages du type `Uncaught ReferenceError: tarteaucitron is not defined` ?
+- Si oui → c’est souvent un souci d’ordre de chargement.
+
+---
+
+Tu veux me montrer un extrait de ton code HTML (en particulier le `<head>` et la fin du `<body>`) ? Je te dirai ce qui cloche 👀
