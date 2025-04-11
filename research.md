@@ -569,3 +569,80 @@ Si tu veux absolument utiliser **`https://tarteaucitron.io/load.js?domain=...`**
 ---
 
 Tu préfères que je t’aide à mettre en place la version auto-hébergée directement ? Je peux te faire un dossier ZIP tout prêt si tu veux.
+
+Oui, c’est **normal** dans certains cas, mais ça dépend de ta config et de comment tu testes ! Voici les explications possibles 👇
+
+---
+
+## ✅ 1. **Tu as déjà cliqué "Accepter" ou "Refuser" une fois ?**
+Tarteaucitron **mémorise le choix** dans un cookie.
+
+➡️ Si c’est le cas, **le bandeau ne se réaffiche pas**.
+
+🔁 Pour le voir à nouveau :
+- Ouvre les **outils développeur > Application > Cookies**
+- Supprime les cookies du site (ex: `tarteaucitron`, `tarteaucitronConsent`)
+- Recharge la page : le bandeau doit réapparaître
+
+---
+
+## ✅ 2. Tu as activé `highPrivacy: true` dans ta config ?
+```js
+tarteaucitron.init({
+  highPrivacy: true,
+  ...
+});
+```
+
+👍 C’est **recommandé** pour être RGPD-compliant, mais attention :  
+👉 Avec `highPrivacy: true`, **aucun service ne sera lancé tant que l'utilisateur ne clique pas**.
+
+Mais normalement le bandeau s’affiche quand même dès le début.
+
+---
+
+## ✅ 3. Tu l’as bien activé dans le JS ?
+Tu dois avoir quelque chose comme :
+
+```js
+tarteaucitron.init({
+  showAlertSmall: true, // petit bandeau en bas à droite
+  ...
+});
+```
+
+Si tu veux **le grand bandeau en bas de l’écran**, ajoute :
+
+```js
+tarteaucitron.init({
+  showAlertSmall: false,
+  orientation: 'bottom',
+  ...
+});
+```
+
+---
+
+## ✅ 4. Tu testes en local avec `file://` ?
+
+Si tu ouvres le fichier **en double-cliquant** → certains scripts ne se lancent pas (problème de sécurité du navigateur).
+
+💡 Utilise un petit serveur local :
+- `npx serve` (Node.js)
+- `python -m http.server`
+- Extension VSCode : **Live Server**
+
+---
+
+## 🔍 Résumé :
+
+| Situation | Bandeau affiché ? |
+|----------|-------------------|
+| L’utilisateur a déjà accepté une fois | ❌ |
+| Cookie supprimé + reload | ✅ |
+| `highPrivacy: true` mais pas de services déclarés | ✅ (bandeau visible) |
+| Ouverture en `file://` sans serveur | ❌ souvent |
+
+---
+
+Tu veux que je vérifie ton fichier `tarteaucitron.init(...)` ? Tu peux me le coller ici 👀
