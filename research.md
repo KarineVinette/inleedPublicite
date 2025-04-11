@@ -492,3 +492,80 @@ Juste après le script :
 ---
 
 Tu veux me montrer un extrait de ton code HTML (en particulier le `<head>` et la fin du `<body>`) ? Je te dirai ce qui cloche 👀
+
+Merci pour les messages d'erreur ! 🙌 Voilà ce qu’ils veulent dire :
+
+---
+
+## ❌ **Erreur 1 :**
+```
+Uncaught ReferenceError: tarteaucitron is not defined
+```
+👉 Cela veut dire que tu essaies d’utiliser `tarteaucitron.init(...)` **avant** que le script `load.js` ait été chargé.
+
+---
+
+## ❌ **Erreur 2 :**
+```
+Invalid tarteaucitron.io tag installation
+```
+👉 Cette erreur signifie que **le domaine que tu as mis dans l’URL du script `load.js` n’est pas enregistré** chez Tarteaucitron.io.
+
+➡️ La version **hébergée gratuite** de Tarteaucitron **nécessite une déclaration de domaine** (même pour `localhost`).
+
+---
+
+### ✅ 2 solutions possibles :
+
+---
+
+### ✅ **Solution A : Utiliser la version auto-hébergée (100% gratuite et sans enregistrement)**
+
+C’est ce que je te conseille 💡
+
+#### Étapes :
+1. Télécharge la lib :  
+   https://github.com/AmauriC/tarteaucitron.js
+
+2. Mets les fichiers dans ton dossier (par ex. `js/tarteaucitron/`)
+
+3. Charge-le en local :
+
+```html
+<script src="/js/tarteaucitron/tarteaucitron.js"></script>
+<script>
+  tarteaucitron.init({
+    privacyUrl: "/politique-confidentialite.html",
+    orientation: "bottom",
+    showAlertSmall: true,
+    cookieslist: true,
+    AcceptAllCta: true,
+    highPrivacy: true,
+    handleBrowserDNTRequest: false,
+    removeCredit: false,
+    moreInfoLink: true,
+    useExternalCss: false
+  });
+
+  // Par exemple :
+  tarteaucitron.user.gtagUa = "G-XXXXXXXXXX";
+  tarteaucitron.job.push("gtag");
+</script>
+```
+
+---
+
+### ✅ **Solution B : T'enregistrer sur Tarteaucitron.io (version hébergée)**
+
+Si tu veux absolument utiliser **`https://tarteaucitron.io/load.js?domain=...`**, alors :
+
+1. Va sur [https://opt-out.ferank.eu/fr/install/](https://opt-out.ferank.eu/fr/install/)
+2. Clique sur "Créer un compte gratuit"
+3. Renseigne `localhost` comme domaine (ou ton domaine réel)
+4. Tu pourras alors récupérer un lien valide pour `load.js`
+
+⚠️ Le lien sera **différent** et personnalisé.
+
+---
+
+Tu préfères que je t’aide à mettre en place la version auto-hébergée directement ? Je peux te faire un dossier ZIP tout prêt si tu veux.
